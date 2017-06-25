@@ -1,15 +1,13 @@
 //
-//  ViewController.h
+//  MovieCell.h
 //  MovieViewer
 //
-//  Created by nathan on 6/24/17.
+//  Created by nathan on 6/25/17.
 //  Copyright © 2017 Nathan Pham. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface MovieCell : UITableViewCell
 
 @end
-
