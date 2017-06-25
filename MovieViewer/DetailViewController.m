@@ -11,7 +11,6 @@
 
 @interface DetailViewController ()
 
-
 @end
 
 @implementation DetailViewController

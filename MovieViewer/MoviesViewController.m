@@ -11,12 +11,13 @@
 #import "DetailViewController.h"
 #import <AFNetworking/UIImageView+AFNetworking.h>
 
+
 @interface MoviesViewController () <UITableViewDataSource, UITableViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property(nonatomic) NSArray *movies;
+
 
 @end
+
 
 @implementation MoviesViewController
 
@@ -29,7 +30,7 @@
     self.movies = @[];
     
     NSString *apiKey = @"a07e22bc18f5cb106bfe4cc1f83ad8ed";
-    NSString *urlString = [@"https://api.themoviedb.org/3/movie/now_playing?api_key=" stringByAppendingString:apiKey];
+    NSString *urlString = [NSString stringWithFormat:@"https://api.themoviedb.org/3/movie/%@?api_key=%@", self.endpoint, apiKey];
     NSURL *url = [NSURL URLWithString:urlString];
 
     
