@@ -16,6 +16,7 @@
 		D847A0A41EFF766D0077E6E7 /* MoviesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D847A0A31EFF766D0077E6E7 /* MoviesViewController.m */; };
 		D847A0A61EFF955A0077E6E7 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D847A0A51EFF955A0077E6E7 /* Default-568h@2x.png */; };
 		D847A0AA1EFF9A610077E6E7 /* MovieCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D847A0A91EFF9A610077E6E7 /* MovieCell.m */; };
+		D847A0AE1EFFA6940077E6E7 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D847A0AD1EFFA6940077E6E7 /* DetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,8 @@
 		D847A0A51EFF955A0077E6E7 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		D847A0A81EFF9A610077E6E7 /* MovieCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieCell.h; sourceTree = "<group>"; };
 		D847A0A91EFF9A610077E6E7 /* MovieCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieCell.m; sourceTree = "<group>"; };
+		D847A0AC1EFFA6940077E6E7 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		D847A0AD1EFFA6940077E6E7 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +126,8 @@
 			children = (
 				D847A0A21EFF766D0077E6E7 /* MoviesViewController.h */,
 				D847A0A31EFF766D0077E6E7 /* MoviesViewController.m */,
+				D847A0AC1EFFA6940077E6E7 /* DetailViewController.h */,
+				D847A0AD1EFFA6940077E6E7 /* DetailViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -251,6 +256,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D847A0AE1EFFA6940077E6E7 /* DetailViewController.m in Sources */,
 				D847A0A41EFF766D0077E6E7 /* MoviesViewController.m in Sources */,
 				D847A0901EFF75C90077E6E7 /* AppDelegate.m in Sources */,
 				D847A0AA1EFF9A610077E6E7 /* MovieCell.m in Sources */,
@@ -415,6 +421,7 @@
 				D847A0A11EFF75CA0077E6E7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
