@@ -91,17 +91,15 @@
     MovieCell* movieCell = (MovieCell *) cell;
     NSDictionary* movie = self.movies[indexPath.row];
     
-    NSString *posterPath = movie[@"poster_path"];
-    NSString *baseURLString = @"http://image.tmdb.org/t/p/w500";
-    
-    NSURL *url = [NSURL URLWithString: [NSString stringWithFormat:@"%@%@", baseURLString, posterPath]];
-    
-    [movieCell.posterView setImageWithURL:url];
     movieCell.titleLabel.text = movie[@"title"];
     movieCell.overviewLabel.text = movie[@"overview"];
     
-    
-    
+    if (movie[@"poster_path"]) {
+        NSString *posterPath = movie[@"poster_path"];
+        NSString *baseURLString = @"http://image.tmdb.org/t/p/w500";
+        NSURL *url = [NSURL URLWithString: [NSString stringWithFormat:@"%@%@", baseURLString, posterPath]];
+        [movieCell.posterView setImageWithURL:url];
+    }
     
 //    Build-in textLabel
 //    cell.textLabel.text = title;
