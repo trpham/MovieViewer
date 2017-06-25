@@ -64,11 +64,10 @@
 		D847A08A1EFF75C90077E6E7 /* MovieViewer */ = {
 			isa = PBXGroup;
 			children = (
+				D847A0AB1EFF9AF50077E6E7 /* View Controllers */,
 				D847A0A71EFF9A250077E6E7 /* Views */,
 				D847A08E1EFF75C90077E6E7 /* AppDelegate.h */,
 				D847A08F1EFF75C90077E6E7 /* AppDelegate.m */,
-				D847A0A21EFF766D0077E6E7 /* MoviesViewController.h */,
-				D847A0A31EFF766D0077E6E7 /* MoviesViewController.m */,
 				D847A0941EFF75CA0077E6E7 /* Main.storyboard */,
 				D847A0971EFF75CA0077E6E7 /* Assets.xcassets */,
 				D847A0991EFF75CA0077E6E7 /* LaunchScreen.storyboard */,
@@ -93,6 +92,15 @@
 				D847A0A91EFF9A610077E6E7 /* MovieCell.m */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		D847A0AB1EFF9AF50077E6E7 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D847A0A21EFF766D0077E6E7 /* MoviesViewController.h */,
+				D847A0A31EFF766D0077E6E7 /* MoviesViewController.m */,
+			);
+			name = "View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -7,6 +7,7 @@
 //
 
 #import "MoviesViewController.h"
+#import "MovieCell.h"
 
 @interface MoviesViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -85,11 +86,15 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"MovieCell"];
-    
+    MovieCell* movieCell = (MovieCell *) cell;
     NSDictionary* movie = self.movies[indexPath.row];
-    NSString* title = movie[@"title"];
     
-    cell.textLabel.text = title;
+    movieCell.titleLabel.text = movie[@"title"];
+    movieCell.overviewLabel.text = movie[@"overview"];
+    
+    
+//    Build-in textLabel
+//    cell.textLabel.text = title;
     
     NSLog(@"row %ld", indexPath.row);
     return cell;
