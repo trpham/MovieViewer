@@ -35,8 +35,14 @@
     MoviesViewController* topRatedViewController = (MoviesViewController *) topRatedNavigationController.topViewController;
     topRatedViewController.endpoint = @"top_rated";
     
+    UINavigationController* upcomingNavigationController = (UINavigationController* )[storyboard instantiateViewControllerWithIdentifier:@"MoviesNavigationController"];
+    upcomingNavigationController.tabBarItem.title = @"Upcoming";
+    upcomingNavigationController.tabBarItem.image = [UIImage imageNamed:@"upcoming"];
+    MoviesViewController* upcomingViewController = (MoviesViewController *) upcomingNavigationController.topViewController;
+    upcomingViewController.endpoint = @"upcoming";
+    
     UITabBarController* tabBarController = [[UITabBarController alloc] init];
-    tabBarController.viewControllers = @[nowPlayingNavigationController, topRatedNavigationController];
+    tabBarController.viewControllers = @[nowPlayingNavigationController, topRatedNavigationController, upcomingNavigationController];
     
     self.window.rootViewController = tabBarController;
     [self.window makeKeyAndVisible];

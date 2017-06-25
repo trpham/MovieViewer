@@ -92,8 +92,10 @@
     MovieCell* movieCell = (MovieCell *) cell;
     NSDictionary* movie = self.movies[indexPath.row];
     
-    movieCell.titleLabel.text = movie[@"title"];
-    movieCell.overviewLabel.text = movie[@"overview"];
+    movieCell.titleLabel.text = [NSString stringWithFormat:@"%@", movie[@"title"]];
+    movieCell.overviewLabel.text = [NSString stringWithFormat:@"%@", movie[@"overview"]];
+    movieCell.ratingLabel.text = [NSString stringWithFormat:@"%@", movie[@"vote_average"]];
+    movieCell.releaseDateLabel.text = [NSString stringWithFormat:@"%@", movie[@"release_date"]];
     
     if (movie[@"poster_path"]) {
         NSString *posterPath = movie[@"poster_path"];
