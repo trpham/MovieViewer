@@ -14,8 +14,6 @@
 
 @interface MoviesViewController () <UITableViewDataSource, UITableViewDelegate>
 
-
-
 @end
 
 
@@ -25,7 +23,10 @@
     [super viewDidLoad];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    // Do any additional setup after loading the view.
+    
+    
+    
+//    self.navigationItem.title =     // Do any additional setup after loading the view.
     
     self.movies = @[];
     
@@ -51,7 +52,7 @@
         if (!error) {
             NSError *jsonError = nil;
             NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&jsonError];
-            NSLog(@"Response: %@", responseDictionary);
+//            NSLog(@"Response: %@", responseDictionary);
             
             self.movies = responseDictionary[@"results"];
             [self.tableView reloadData];
@@ -64,6 +65,12 @@
 //    task.resume()
     [task resume];
     
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+//    NSLog(@"Navigation bar title: %@",self.navigationItem.title);
+//    NSLog(@"Tab bar title: %@",self.navigationController.tabBarItem.title);
+    self.navigationItem.title = self.navigationController.tabBarItem.title;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -107,7 +114,7 @@
 //    Build-in textLabel
 //    cell.textLabel.text = title;
     
-    NSLog(@"row %ld", indexPath.row);
+//    NSLog(@"row %ld", indexPath.row);
     return cell;
 }
 
