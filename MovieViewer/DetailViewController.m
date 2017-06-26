@@ -32,6 +32,7 @@
         NSString *baseURLString = @"http://image.tmdb.org/t/p/w500";
         NSURL *url = [NSURL URLWithString: [NSString stringWithFormat:@"%@%@", baseURLString, posterPath]];
         [self.posterImageView setImageWithURL:url];
+        
     }
 }
 
