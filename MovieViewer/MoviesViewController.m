@@ -24,6 +24,10 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(refreshControlAction:) forControlEvents:UIControlEventValueChanged];
+    [self.tableView addSubview:refreshControl];
+    
     self.movies = @[];
     
     NSString *apiKey = @"a07e22bc18f5cb106bfe4cc1f83ad8ed";
@@ -48,6 +52,32 @@
     
     [task resume];
     
+}
+
+- (void)refreshControlAction: (UIRefreshControl *) refreshControl {
+    
+    NSString *apiKey = @"a07e22bc18f5cb106bfe4cc1f83ad8ed";
+    NSString *urlString = [NSString stringWithFormat:@"https://api.themoviedb.org/3/movie/%@?api_key=%@", self.endpoint, apiKey];
+    NSURL *url = [NSURL URLWithString:urlString];
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
+    
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (!error) {
+            NSError *jsonError = nil;
+            NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&jsonError];
+            //            NSLog(@"Response: %@", responseDictionary);
+            self.movies = responseDictionary[@"results"];
+            [self.tableView reloadData];
+        } else {
+            NSLog(@"An error occurred: %@", error.description);
+        }
+    }];
+  
+    [refreshControl endRefreshing];
+    [task resume];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
