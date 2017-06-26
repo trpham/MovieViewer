@@ -12,7 +12,7 @@
 #import <AFNetworking/UIImageView+AFNetworking.h>
 
 
-@interface MoviesViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface MoviesViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 
 @end
 
@@ -23,6 +23,9 @@
     [super viewDidLoad];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    self.searchBar.delegate = self;
+    
+    self.filteredMovies = @[];
     
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(refreshControlAction:) forControlEvents:UIControlEventValueChanged];
@@ -52,6 +55,12 @@
     
     [task resume];
     
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    
+    
+    [self.tableView reloadData];
 }
 
 - (void)refreshControlAction: (UIRefreshControl *) refreshControl {
@@ -112,8 +121,8 @@
     
     movieCell.titleLabel.text = [NSString stringWithFormat:@"%@", movie[@"title"]];
     movieCell.overviewLabel.text = [NSString stringWithFormat:@"%@", movie[@"overview"]];
-    movieCell.ratingLabel.text = [NSString stringWithFormat:@"%@", movie[@"vote_average"]];
-    movieCell.releaseDateLabel.text = [NSString stringWithFormat:@"%@", movie[@"release_date"]];
+    movieCell.ratingLabel.text = [NSString stringWithFormat:@"🌟 %@", movie[@"vote_average"]];
+    movieCell.releaseDateLabel.text = [NSString stringWithFormat:@"🎬 %@", movie[@"release_date"]];
     
     if (movie[@"poster_path"]) {
         NSString *posterPath = movie[@"poster_path"];
