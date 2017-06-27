@@ -14,7 +14,8 @@
     [super viewDidLoad];
     
     self.movies = @[];
-    self.filteredMovies = @[];
+    self.filteredMovies = [[NSMutableArray alloc] init];
+    self.search = NO;
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -26,10 +27,6 @@
     
     NSURLSessionDataTask *task = self.handleAPIRequest;
     [task resume];
-}
-
-- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    [self.tableView reloadData];
 }
 
 - (NSURLSessionDataTask *)handleAPIRequest {
@@ -65,6 +62,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     self.navigationItem.title = self.navigationController.tabBarItem.title;
 }
 
@@ -74,7 +72,12 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _movies.count;
+    if (self.search) {
+        return self.filteredMovies.count;
+    }
+    else {
+        return _movies.count;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -82,6 +85,10 @@
     UITableViewCell  *cell = [tableView dequeueReusableCellWithIdentifier:@"MovieCell"];
     MovieCell *movieCell = (MovieCell *) cell;
     NSDictionary *movie = self.movies[indexPath.row];
+    
+    if (self.search) {
+        movie = self.filteredMovies[indexPath.row];
+    }
     
     movieCell.titleLabel.text = [NSString stringWithFormat:@"%@", movie[@"title"]];
     movieCell.overviewLabel.text = [NSString stringWithFormat:@"%@", movie[@"overview"]];
@@ -119,14 +126,53 @@
     return cell;
 }
 
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    self.search = YES;
+}
+
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
+    self.search = NO;
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)text {
+    
+    // Logic to filter movies
+    if (!text.length) {
+        self.search = NO;
+    }
+    else {
+        self.search = YES;
+        self.filteredMovies = [[NSMutableArray alloc] init];
+        for (NSDictionary* movie in self.movies) {
+            NSRange nameRange = [movie[@"title"] rangeOfString:text options:NSCaseInsensitiveSearch];
+            NSRange overviewRange = [movie[@"overview"] rangeOfString:text options:NSCaseInsensitiveSearch];
+            if(nameRange.location != NSNotFound || overviewRange.location != NSNotFound) {
+                [self.filteredMovies addObject:movie];
+            }
+        }
+    }
+    
+    [self.tableView reloadData];
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    self.search = NO;
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar __TVOS_PROHIBITED {
+    self.search = NO;
+}
+
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     NSIndexPath *indexPath = _tableView.indexPathForSelectedRow;
     NSDictionary *movie = _movies[indexPath.row];
+    if (self.search) {
+        movie = self.filteredMovies[indexPath.row];
+    }
     UIViewController  *viewController = segue.destinationViewController;
     DetailViewController  *detailViewController = (DetailViewController *) viewController;
     detailViewController.movie = movie;
-
 }
 
 @end
